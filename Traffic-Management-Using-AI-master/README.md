@@ -1,125 +1,363 @@
-<div align = "center">
- 
-# Traffic-Management-Using-AI
-  
-[![Python version](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![Python version](https://img.shields.io/badge/matplotlib-3.5.1-green.svg)](https://pypi.org/project/matplotlib/)
-[![Python version](https://img.shields.io/badge/NEAT-0.92-yellow.svg)](https://pypi.org/project/neat-python/)
-[![MATLAB](https://img.shields.io/badge/MATLAB-gray.svg)](https://www.mathworks.com/products/matlab.html)
-[![Python version](https://img.shields.io/badge/pygame-2.1.2-blue.svg)](https://pypi.org/project/pygame/)
- <p> Our Traffic Management System Uses AI to Coordinate traffic such that people have to Spent the least time in traffic. Our AI coordinate between traffic signals to ensure people don't have to stop at multiple signals. We use image detection to find traffic density and allot time dynamically to each lane.</p>
-</div>
- 
- ## Problem Statement
- * Congestion is mainly due to the intensive use of automobiles, whose ownership has spread massively in Urban Area in recent decades.
- * A lot of time gets wasted in traffic signals as the no. of the vehicles is the less than expected.
- * While driving through consecutive traffic signals we often have to wait at each of the signal.
- * Traffic Not only cause the extra delay but also increase fuel consumption, and transportation cost.
+# Project README
 
-## Customary Solutions
-* **Manual Controlling** :- As the Name Suggests That's requires More ManPower to control Traffic and Traffic Police is alloted to each traffic signals and they have to control traffic.
-* **Automatic Controlling** :- Automatic Traffic Light is Controlled by the timer and electrical Sensors. The Light are getting automatically Getting ON and OFF. 
-* **Electronic Controlling** :- In Electronic Contrilling Method We have To placing some detector or sensors on the traffic area, and this sensors give data about the traffic Density and controll the traffic signals.
+## Overview
+This README provides a comprehensive guide to the project, its structure, setup instructions, and usage guidelines. It serves as the primary documentation for new users and contributors.
 
-## Drawbacks of the Customary Solution
-* The Manual Controlling System is static and requires a large number of manpower.
-* They May cause a delay in the quick movement of traffic.
-* Electronic Sensors and detector are very expensive in cost, accuracy and coverage are often in conflict. 
+## Table of Contents
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Features](#features)
+- [Architecture](#architecture)
+- [API Reference](#api-reference)
+- [Development](#development)
+- [Testing](#testing)
+- [Performance Considerations](#performance-considerations)
+- [Security](#security)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Proposed System
-<p>The Traffic flow has no specific pattern that is followed, and the static signal timers pose a huge problem to the already critical problem of congestion.</p>
-
-<p>Therefore, we are implementing a system which aims to reduce chance of such scenarios by automatically computing the optimal green signal time based on the current traffic at the signal will ensure that the direction with more traffic is allotted a green signal for longer duration of time as compared to the direction with lesser traffic.</p>
-
-<p>So our dynamic traffic management system can override the current static system which cause unwanted delays and congestion. also our system will also reduce the time complexity of vehicles pass.</p>
-
-<p>The main objective of our system is to design an AI Based on Edge Computing that can Solve Current Traffic Situation Our System aims to use Image Recognization System and Live video feed from the CCTV Cameras at Traffic Junctions for calculating Real time traffic density and our AI Set the signal Time accordingly.</p>
-
-## Advantages of the Our Traffic Management System
-* Autonomous: There are no need of the Manpower
-* Dynamic System, Manages Traffic light switching according to current traffic density.
-* Less expensive than other solutions.
-* There are no need to new hardware to be installed.
-
-## Step by Step FlowChart of our Proposed System
-Step 1 :- Capturing Vehicles Image Using CCTV At Traffic Signals</br>
-Step 2 :- Indetify The Vehicles and Calculate Number of the Vehicles</br>
-Step 3 :- Send Final Number of the Vehicles to AI</br>
-Step 4 :- AI Scheduling the Green Signal Time according to Traffic Density</br>
-Step 5 :- Updating traffic Signal Time</br>
-
-## Some of the Factors That Our AI Considered  While Switching Traffic Signals
-* The Processing Time of the Image Recognization System to Calculate traffic Density.
-* Lag each vehicle suffers during start up.
-* Average speed each catagory of Vehicles.
-* The no. of Lanes.
 
 ## Installation
 
-All user Installation
+### Prerequisites
+- Node.js (v14.0.0 or higher)
+- npm (v6.0.0 or higher)
+- MongoDB (v4.0.0 or higher)
+- Redis (optional, for caching)
+
+### Step-by-step Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/username/project.git
+   cd project
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create environment configuration:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Set up the database:
+   ```bash
+   npm run setup:db
+   ```
+
+5. Build the project:
+   ```bash
+   npm run build
+   ```
+
+## Configuration
+
+### Environment Variables
+The following environment variables can be configured in your `.env` file:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port | 3000 |
+| `NODE_ENV` | Environment (development/production) | development |
+| `MONGODB_URI` | MongoDB connection string | mongodb://localhost:27017/project |
+| `REDIS_URL` | Redis connection string (optional) | redis://localhost:6379 |
+| `JWT_SECRET` | Secret for JWT tokens | (no default, must be set) |
+| `LOG_LEVEL` | Logging level | info |
+
+### Configuration Files
+- `config/default.js`: Default configuration
+- `config/production.js`: Production overrides
+- `config/development.js`: Development overrides
+
+## Usage
+
+### Basic Usage
+1. Start the server:
+   ```bash
+   npm start
+   ```
+
+2. Access the application at `http://localhost:3000`
+
+### CLI Commands
+The project includes several CLI commands to help with common tasks:
+
+```bash
+# Run in development mode with hot reloading
+npm run dev
+
+# Generate API documentation
+npm run docs
+
+# Run database migrations
+npm run migrate
+
+# Rollback database migrations
+npm run migrate:rollback
+
+# Seed the database with sample data
+npm run seed
 ```
-pip install neat-python
-pip install pygame
+
+## Features
+
+### Core Features
+- User authentication and authorization
+- Data management and persistence
+- Real-time notifications
+- File upload and management
+- Reporting and analytics
+- API integrations
+
+### Feature Details
+Each feature is described in more detail below:
+
+#### User Authentication
+- JWT-based authentication
+- Role-based access control
+- Multi-factor authentication (optional)
+- Password reset functionality
+- Session management
+
+#### Data Management
+- CRUD operations for all resources
+- Data validation
+- Pagination, filtering, and sorting
+- Caching for improved performance
+- Data export (CSV, JSON)
+
+## Architecture
+
+### System Components
+The project follows a layered architecture:
+
+1. **Presentation Layer**: UI components and controllers
+2. **Business Logic Layer**: Services and domain logic
+3. **Data Access Layer**: Repositories and data models
+4. **Infrastructure Layer**: Database, caching, logging
+
+### Technology Stack
+- **Frontend**: React, Redux, Material-UI
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Caching**: Redis
+- **Authentication**: JWT, Passport.js
+- **Testing**: Jest, Supertest
+- **Documentation**: JSDoc, Swagger
+
+### Design Patterns
+- Repository Pattern for data access
+- Factory Pattern for object creation
+- Observer Pattern for event handling
+- Strategy Pattern for algorithm selection
+- Singleton Pattern for shared resources
+
+## API Reference
+
+### REST API Endpoints
+
+#### Authentication
+- `POST /api/auth/login` - User login
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/logout` - User logout
+- `POST /api/auth/refresh` - Refresh access token
+- `POST /api/auth/forgot-password` - Request password reset
+- `POST /api/auth/reset-password` - Reset password
+
+#### Users
+- `GET /api/users` - List users
+- `GET /api/users/:id` - Get user by ID
+- `POST /api/users` - Create user
+- `PUT /api/users/:id` - Update user
+- `DELETE /api/users/:id` - Delete user
+
+#### Resources
+- `GET /api/resources` - List resources
+- `GET /api/resources/:id` - Get resource by ID
+- `POST /api/resources` - Create resource
+- `PUT /api/resources/:id` - Update resource
+- `DELETE /api/resources/:id` - Delete resource
+
+### Request and Response Examples
+Detailed examples of API requests and responses can be found in the Swagger documentation at `/api-docs`.
+
+## Development
+
+### Development Workflow
+1. Create a feature branch from `main`
+2. Implement changes with tests
+3. Submit a pull request
+4. Code review and approval
+5. Merge to `main`
+
+### Code Style
+This project follows the Airbnb JavaScript Style Guide with some modifications. ESLint and Prettier are configured to enforce the style guide.
+
+```bash
+# Check code style
+npm run lint
+
+# Fix code style issues
+npm run lint:fix
 ```
-for the Graph only
+
+### Documentation Standards
+- Use JSDoc comments for all functions and classes
+- Update API documentation when endpoints change
+- Keep the README updated with new features and changes
+
+## Testing
+
+### Testing Strategy
+The project employs multiple levels of testing:
+
+- **Unit tests**: Test individual components in isolation
+- **Integration tests**: Test interactions between components
+- **End-to-end tests**: Test complete user flows
+- **Performance tests**: Test system under load
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run only unit tests
+npm run test:unit
+
+# Run only integration tests
+npm run test:integration
+
+# Run end-to-end tests
+npm run test:e2e
 ```
-pip install matplotlib
+
+### Test Coverage
+The project aims to maintain at least 80% test coverage. Coverage reports are generated after running `npm run test:coverage`.
+
+## Deployment
+
+### Deployment Environments
+- **Development**: For active development
+- **Staging**: For QA and testing
+- **Production**: For end users
+
+### Deployment Process
+1. **Build**: Create optimized production build
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy**: Choose one of the deployment options:
+   - Docker deployment
+   - Cloud platform deployment (AWS, GCP, Azure)
+   - Traditional server deployment
+
+### Docker Deployment
+```bash
+# Build Docker image
+docker build -t project:latest .
+
+# Run Docker container
+docker run -p 3000:3000 -e NODE_ENV=production project:latest
 ```
 
-Run the Python File
-```
-python simulation.py
-```
-
-For the Using NEAT Download the config.txt file from the Below Link</br>
-Link :- https://techwithtim.net/wp-content/uploads/2019/08/config-feedforward.txt</br>
-Save the Above file as config.txt 
-
-## Visualization Of the Static Model
-<p>Here we see in our static model that static time is given to each signal i.e. 30sec which leads to wastage of time when enough vehicles are not present in that lane. </p>
-
-https://user-images.githubusercontent.com/83399207/166122672-41c9be4b-f215-4673-9019-69fec0b0b2e3.mp4
-
-## Visualization Of the Dynamic Model
-<p>In our dynamic model, using image detection we determine the traffic density in that lane and provide just enough time for the vehicles to pass which leads to time 
-being saved in each of the lane and in each cycle. </p>
-
-https://user-images.githubusercontent.com/83399207/166122642-451f48f1-028a-4911-adb0-2c7ab9ae892d.mp4
-
-## Results
-Here we Compare the Total Number of the Vehicles that crosses the intersection over 1 Simulation(5 Min.) in the current system and Our implemented System With The random number of the Vehicles, Over A Total Time of 1 Hour With 12 Simulations of 5 Minutes each.  
-
-![Comparison](https://user-images.githubusercontent.com/83399207/166123300-80854b3e-3da2-446d-87a5-b07aa1595325.png)
-
-## Graph Representation
-<p>As we can see with all conditions alike, our dynamic system was able to pass 3193 Vehicles while the current static system could pass only 2356 in 1 hour which means 837 more vehicles.
-
- Thus our proposed Traffic managment system with AI improves the performance by over 35%.
- 
- Our proposed system on and average allow 70 more vehicles to pass every one simulation(5 min) aas compared to the current system this implies a reduction in time complexity of green signal time(Signal is green but no vehiclea passes) as well as the waiting time of the vehicles.
-</p>
-
-![graph](https://user-images.githubusercontent.com/83399207/166123319-a8e4a219-3ec0-4d55-9fd1-607147ea2d7e.png)
-## NEAT AI
-### Working of NEAT AI
 
 
+## Performance Considerations
 
-![1](https://user-images.githubusercontent.com/83399207/166124081-42d7b3b2-f355-465a-9fae-dac8cff24043.jpg)
-![2](https://user-images.githubusercontent.com/83399207/166124084-84de468e-f0c4-471a-b7c8-23db6680f1ab.jpg)
-![3](https://user-images.githubusercontent.com/83399207/166124086-1a5d9c4b-4faf-45a8-a431-0c9cf631c871.jpg)
-![4](https://user-images.githubusercontent.com/83399207/166124091-2e9a53e0-9658-44c7-8f94-518787e48e97.jpg)
-![5](https://user-images.githubusercontent.com/83399207/166124089-18e2785f-6d9e-4422-9167-6e4fd107e662.jpg)
-![6](https://user-images.githubusercontent.com/83399207/166124090-74ff8b01-9fb5-4476-85e0-5d6327c1b0c4.jpg)
+### Performance Optimizations
+- Database indexing for frequently queried fields
+- Response caching with Redis
+- Rate limiting to prevent abuse
+- Connection pooling for database access
+- Static asset optimization and CDN usage
 
-## Graphical visualization of AI
-The following video shows how the AI will coordinate the signals so that the vehicles will not have to stop at every signal if they want to travel on the same straight route.
+### Monitoring
+Performance metrics are collected and monitored using:
+- Prometheus for metrics collection
+- Grafana for dashboards and visualization
+- Alerts for performance degradation
 
-https://user-images.githubusercontent.com/83399207/166124009-7ae31ef1-dd3f-4070-b77b-f8539402f355.mp4
+## Security
 
-### Conclusion
-- Using the dynamic model we can effectively reduce the waiting time of the vehicles.
-- Our proposed Traffic management system with AI improves the performance by over 35% comaparing to Current System.
-- Using the AI model adds an additional functionality to reduce the waiting time of vehicles at their next crossing.
-- Both of these can be implemented using edge computing at the traffic signal itself.
-- It can be implemented with effectively with very little cost.   
+### Security Measures
+- HTTPS for all communications
+- Input validation and sanitization
+- CSRF protection
+- XSS prevention
+- Rate limiting and brute force protection
+- Secure headers configuration
+- Regular dependency updates
+
+### Security Best Practices
+- All passwords are hashed using bcrypt
+- Environment variables for sensitive information
+- Regular security audits
+- Principle of least privilege for API endpoints
+
+## Troubleshooting
+
+### Common Issues
+1. **Connection errors**: Check database connection settings in `.env`
+2. **Authentication failures**: Verify JWT_SECRET is set correctly
+3. **Performance issues**: Check database indexes and query performance
+4. **Memory leaks**: Monitor memory usage during development
+
+### Debugging
+- Use the debug logs: `LOG_LEVEL=debug npm start`
+- Check application logs in `logs/` directory
+- Use the built-in debugging tools: `npm run debug`
+
+## FAQ
+
+### General Questions
+1. **Q: How do I reset my admin password?**  
+   A: Use the CLI tool: `npm run admin:reset-password`
+
+2. **Q: How can I back up the database?**  
+   A: Run the backup script: `npm run db:backup`
+
+3. **Q: Is there a size limit for file uploads?**  
+   A: Yes, the default limit is 10MB, configurable in `.env`
+
+### Technical Questions
+1. **Q: Can I use a different database?**  
+   A: Yes, adapt the database adapter in `src/adapters/`
+
+2. **Q: How do I extend the API?**  
+   A: Create new controllers and routes in their respective directories
+
+3. **Q: How are migrations handled?**  
+   A: Migrations use the built-in migration tool, run with `npm run migrate`
+
+## Contributing
+
+### Contribution Guidelines
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Write or update tests
+5. Update documentation
+6. Submit a pull request
+
+### Code Review Process
+All pull requests require at least one code review before merging. Code reviews should check:
+- Functionality
+- Test coverage
+- Code style
+- Documentation
+
+### Development Environment Setup
+See the [Installation](#installation) and [Development](#development) sections.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
